@@ -12,9 +12,7 @@
 get_original_alpha <- function(scrna, gene, x.alpha, assay = "RNA", slot = "data"){
   Seurat::DefaultAssay(scrna) <- assay
   
-  Seurat5 <- utils::packageVersion("SeuratObject") >= "5.0.0"
-  
-  if (Seurat5) {
+  if (utils::packageVersion("SeuratObject") >= "5.0.0") {
     # If Seurat v5, feed the 'slot' variable into the 'layer' argument
     g.exprs <- FetchData(scrna, gene, layer = slot) 
   } else {
@@ -194,7 +192,7 @@ Detect_single_marker <- function(scrna, id, step = 0.1,  slot = "data", category
   gene.rank.list <- data.frame()
 
   Seurat::DefaultAssay(scrna) <- assay
-  if (Seurat5){
+  if (utils::packageVersion("SeuratObject") >= "5.0.0"){
     exprs.matrix <- Seurat::FetchData(scrna, vars = c(rownames(markers), "ident"), layer = slot)
   } else {
     exprs.matrix <- Seurat::FetchData(scrna, vars = c(rownames(markers), "ident"), slot = slot) 
@@ -561,7 +559,7 @@ plot_ridge <- function(scrna, id, genes, ncol = 1, step = 0.01, show_split = T, 
 get_gene_score_pos.fbeta <- function(scrna, gene, id, step = 0.01, assay = "RNA", slot = "data") {
   Seurat::DefaultAssay(scrna) <- assay
   # scrna@active.assay <- assay
-  if(Seurat5){
+  if(utils::packageVersion("SeuratObject") >= "5.0.0"){
     data.mat.surf <- Seurat::FetchData(scrna, vars = c(gene, "ident"), layer = slot)
   } else {
     data.mat.surf <- Seurat::FetchData(scrna, vars = c(gene, "ident"), slot = slot)
@@ -633,7 +631,7 @@ get_gene_score_pos.fbeta <- function(scrna, gene, id, step = 0.01, assay = "RNA"
 get_gene_score_neg.fbeta <- function(scrna, gene, id, step = 0.01, assay = "RNA", slot = "data") {
   Seurat::DefaultAssay(scrna) <- assay
   # scrna@active.assay <- assay
-  if(Seurat5) {
+  if(utils::packageVersion("SeuratObject") >= "5.0.0") {
     data.mat.surf <- Seurat::FetchData(scrna, vars = c(gene, "ident"), layer = slot)
   } else {
     data.mat.surf <- Seurat::FetchData(scrna, vars = c(gene, "ident"), slot = slot)
@@ -963,7 +961,7 @@ Detect_combine_markers <- function(scrna, id, step = 0.1, category = NULL,
 
 get_split_pos_pos <- function(scrna, gene1, gene2, id, step = 0.01, assay = "RNA", slot = "data") {
   DefaultAssay(scrna) <- assay
-  if (Seurat5) {
+  if (utils::packageVersion("SeuratObject") >= "5.0.0") {
     data.mat.surf <- FetchData(scrna, vars = c(gene1, gene2, "ident"), layer = slot)
   } else {
     data.mat.surf <- FetchData(scrna, vars = c(gene1, gene2, "ident"), slot = slot)
@@ -1036,7 +1034,7 @@ get_split_pos_pos <- function(scrna, gene1, gene2, id, step = 0.01, assay = "RNA
 
 get_split_pos_neg <- function(scrna, gene1, gene2, id, step = 0.01, assay = "RNA", slot = "data") {
   Seurat::DefaultAssay(scrna) <- assay
-  if (Seurat5) {
+  if (utils::packageVersion("SeuratObject") >= "5.0.0") {
     data.mat.surf <- Seurat::FetchData(scrna, vars = c(gene1, gene2, "ident"), layer = slot)
   } else {
     data.mat.surf <- Seurat::FetchData(scrna, vars = c(gene1, gene2, "ident"), slot = slot)
@@ -1119,7 +1117,7 @@ get_split_pos_neg <- function(scrna, gene1, gene2, id, step = 0.01, assay = "RNA
 get_split_neg_neg  <- function(scrna, gene1, gene2, id, step = 0.01, assay = "RNA", slot = "data") {
   Seurat::DefaultAssay(scrna) <- assay
   # scrna@active.assay <- assay
-  if (Seurat5) {
+  if (utils::packageVersion("SeuratObject") >= "5.0.0") {
     data.mat.surf <- Seurat::FetchData(scrna, vars = c(gene1, gene2, "ident"), layer = slot)
   } else {
     data.mat.surf <- Seurat::FetchData(scrna, vars = c(gene1, gene2, "ident"), slot = slot)
@@ -1718,7 +1716,7 @@ plot_filter_combination_first2 <- function(scrna, df.split, id, step = 0.01){
 get_gene_score_pos <- function(scrna, gene, id, step = 0.01, assay = "RNA", slot = "data", pseudo.count = 0.01) {
 
   scrna@active.assay <- assay
-  if (Seurat5) {
+  if (utils::packageVersion("SeuratObject") >= "5.0.0") {
     exprs.matrix <- Seurat::FetchData(scrna, vars = c(gene, "ident"), layer = slot)
   } else {
     exprs.matrix <- Seurat::FetchData(scrna, vars = c(gene, "ident"), slot = slot)
@@ -1803,7 +1801,7 @@ get_gene_score_pos <- function(scrna, gene, id, step = 0.01, assay = "RNA", slot
 get_gene_score_neg <- function(scrna, gene, id, step = 0.01, assay = "RNA", slot = "data", pseudo.count = 0.01) {
 
   scrna@active.assay <- assay
-  if (Seurat5) {
+  if (utils::packageVersion("SeuratObject") >= "5.0.0") {
     exprs.matrix <- Seurat::FetchData(scrna, vars = c(gene, "ident"), layer = slot)
   } else {
     exprs.matrix <- Seurat::FetchData(scrna, vars = c(gene, "ident"), slot = slot)
